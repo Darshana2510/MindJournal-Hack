@@ -95,69 +95,33 @@ Streamlit → Python Journal Agent → Gemini → Embeddings → PostgreSQL + pg
 ## 6. How MindJournal Works
 
 The system follows an agentic workflow:
-                    👤 USER
-                      │
-                      ▼
-              ┌─────────────────┐
-              │   Streamlit UI  │
-              │  Chat Interface │
-              └────────┬────────┘
-                       │
-                       ▼
-              ┌─────────────────┐
-              │  SAFETY GATE    │
-              │ Crisis Detection│
-              └───────┬─────────┘
-                      │
-             ┌────────┴────────┐
-             │                 │
-        🚨 Crisis           ✅ Safe
-             │                 │
-             ▼                 ▼
-     Crisis Response    ┌─────────────────┐
-                        │  JOURNAL AGENT  │
-                        └────────┬────────┘
-                                 │
-                  ┌──────────────┴──────────────┐
-                  ▼                             ▼
-        ┌─────────────────┐           ┌─────────────────┐
-        │ Emotion Analysis│           │ Create Embedding│
-        │ Emotion/Intensity│          │ Gemini Embedding│
-        │ Topics/Confidence│         └────────┬────────┘
-        └────────┬────────┘                    │
-                 │                             ▼
-                 │                   ┌─────────────────┐
-                 │                   │ PostgreSQL +     │
-                 │                   │    pgvector      │
-                 │                   └────────┬────────┘
-                 │                            │
-                 │                            ▼
-                 │                   ┌─────────────────┐
-                 │                   │ Semantic Memory │
-                 │                   │    Retrieval    │
-                 │                   └────────┬────────┘
-                 │                            │
-                 └──────────────┬─────────────┘
-                                ▼
-                    ┌──────────────────────┐
-                    │ Context Assembly     │
-                    │ Current + Past Memory│
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │    Google Gemini     │
-                    │ Conversational Agent │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │ Reflective Response  │
-                    │ + Emotional Insight  │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    💾 Persistent Memory
+User
+ ↓
+Streamlit Chat Interface
+ ↓
+Safety & Crisis Detection
+ ↓
+Emotion + Intensity + Confidence Analysis
+ ↓
+Journal Entry Persistence
+ ↓
+Gemini Embedding Generation
+ ↓
+PostgreSQL + pgvector
+ ↓
+Semantic Memory Retrieval
+ ↓
+Conversation History + Relevant Past Memories
+ ↓
+Context Assembly
+ ↓
+Google Gemini Conversational Agent
+ ↓
+Personalized Emotional Reflection
+ ↓
+Save Conversation & Response
+ ↓
+Persistent Long-Term Memory
 
 
 ## 7. Setup
